@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import axios from 'axios';
+import { debounce } from 'lodash';
+import Input from './components/Input';
+import Button from './components/Button';
+import WeatherDisplay from './components/WeatherDisplay';
 
-function App() {
+const API_KEY = 'e68544cf6714121e10e2a47b8ee289da';
+
+const App: React.FC = () => {
+  const [city, setCity] = useState('');
+  const [weatherData, setWeatherData] = useState<any>(null);
+
+  const searchWeather = async () => {
+    try {
+      const response = await axios.get(
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`
+      );
+      console.log('Response from OpenWeatherMap API:', response.data);
+      setWeatherData(response.data);
+    } catch (error) {
+      console.error('Error fetching weather data:', error);
+    }
+  };
+
+  const debouncedSearchWeather = debounce(searchWeather, 500);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div>
+        <Input value={city} onChange={setCity} />
+        <Button onClick={debouncedSearchWeather}>Search</Button>
+        {weatherData && <WeatherDisplay weatherData={weatherData} />}
+      </div>
   );
-}
+};
 
 export default App;
