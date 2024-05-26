@@ -5,7 +5,7 @@ interface InputProps {
     onChange: (value: string) => void;
 }
 
-const Input: React.FC<InputProps> = ({ value, onChange }) => {
+const Input = ({ value, onChange }: InputProps) => {
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         onChange(event.target.value);
     };
@@ -13,4 +13,4 @@ const Input: React.FC<InputProps> = ({ value, onChange }) => {
     return <input type="text" value={value} onChange={handleChange} />;
 };
 
-export default Input;
+export { Input };

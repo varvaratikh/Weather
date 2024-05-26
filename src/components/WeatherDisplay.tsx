@@ -13,7 +13,7 @@ interface WeatherDisplayProps {
     };
 }
 
-const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ weatherData }) => {
+const WeatherDisplay = ({ weatherData }: WeatherDisplayProps) => {
     const { main, weather } = weatherData;
 
     console.log('Weather Data:', weatherData);
@@ -35,4 +35,4 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ weatherData }) => {
     );
 };
 
-export default WeatherDisplay;
+export { WeatherDisplay };

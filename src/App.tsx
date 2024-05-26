@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { debounce } from 'lodash';
-import Input from './components/Input';
-import Button from './components/Button';
-import WeatherDisplay from './components/WeatherDisplay';
+import { Input } from './components/Input';
+import { Button } from './components/Button';
+import { WeatherDisplay } from './components/WeatherDisplay';
 
 const API_KEY = 'e68544cf6714121e10e2a47b8ee289da';
 
-const App: React.FC = () => {
+const App = () => {
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState<any>(null);
 
@@ -34,4 +34,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export { App };
